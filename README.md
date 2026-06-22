@@ -186,12 +186,87 @@ Ihre Aufgabe ist dann:
 
 Falls im Verlauf der Jürgen-Issues ein UML-Klassendiagramm gefordert wird, ergänzen Sie es in diesem Abschnitt.
 
+<!-- kevin-uml:start -->
 ```text @plantUML
 @startuml
+skinparam classAttributeIconSize 0
+
+class Grundstueck {
+    - flurstueckNummer: string
+    - groesse: double
+    - lage: string
+    + getBauflaechen(): List<Bauflaeche>
+}
+
+class Bauflaeche {
+    - flurstueckNummer: string
+    - groesse: double
+    - aktuelleNutzung: Nutzungstyp
+    - bebaubarkeit: Bebaubarkeit
+    - status: FlaechenStatus
+    + markiereAls(status: FlaechenStatus): void
+}
+
+class Metadaten {
+    - bPlanNummer: string
+    - bodenrichtwert: double
+    - eigentuemer: string
+}
+
+class Bauvorhaben {
+    - id: int
+    - geplanteNutzung: Nutzungstyp
+    - beginn: DateTime
+    - fertigstellung: DateTime
+    - status: VorhabenStatus
+    + aktualisiereStatus(neuerStatus: VorhabenStatus): void
+    + verknuepfeFlaeche(flaeche: Bauflaeche): void
+}
+
+class Antragsteller {
+    - name: string
+    - kontaktdaten: string
+    - firma: string
+}
+
+enum Nutzungstyp {
+    Gewerbe
+    Landwirtschaft
+    Forst
+    Wohnnutzung
+    Brachflaeche
+    Infrastruktur
+}
+
+enum Bebaubarkeit {
+    Ja
+    Nein
+    Auflagen
+}
+
+enum FlaechenStatus {
+    Frei
+    Reserviert
+    Bebaut
+}
+
+enum VorhabenStatus {
+    AntragEingereicht
+    Genehmigt
+    Abgelehnt
+    InBearbeitung
+    Abgeschlossen
+}
+
+Grundstueck "1" *-- "1..*" Bauflaeche : enthält
+Bauflaeche "1" -- "1" Metadaten : verknüpft mit
+Bauvorhaben "*" -- "1..*" Bauflaeche : nutzt
+Bauvorhaben "*" -- "1" Antragsteller : beantragt von
 
 @enduml
 ```
 @plantUML.eval(png)
+<!-- kevin-uml:end -->
 
 ## Aufgabenmaterial
 
