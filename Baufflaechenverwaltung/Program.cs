@@ -69,6 +69,16 @@ namespace Baufflaechenverwaltung
         public VorhabenStatus Status { get; set; }
         public List<Bauflaeche> ZugewieseneFlaechen { get; set; } = new List<Bauflaeche>();
 
+        public Bauvorhaben(int id, Antragsteller antragssteller, Nutzungstyp nutzung, DateTime beginn, DateTime fertigstellung, VorhabenStatus status)
+        {
+            Id = id;
+            Antragsteller = antragssteller;
+            GeplanteNutzung = nutzung;
+            Beginn = beginn;
+            Fertigstellung = fertigstellung;
+            Status = status;
+        }
+
         public void AktualisiereStatus(VorhabenStatus neuerStatus)
         {
             Status = neuerStatus;
