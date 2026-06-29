@@ -88,33 +88,13 @@ namespace Baufflaechenverwaltung
         static void Main(string[] args)
         {
             // Demonstration der Funktionalität
-            var grundstueck = new Grundstueck { FlurstueckNummer = "0015 00012" };
-            var flaeche = new Bauflaeche
-            {
-                FlurstueckNummer = "0015 00012 001/002",
-                Groesse = 500.0,
-                Lage = "Leipzig-Nord",
-                AktuelleNutzung = Nutzungstyp.Brachflaeche,
-                Bebaubarkeit = Bebaubarkeit.Ja,
-                Status = FlaechenStatus.Frei,
-                Metadaten = new Metadaten
-                {
-                    BPlanNummer = "BP-2022-089 – Wohngebiet Leipzig-Nord",
-                    Bodenrichtwert = 500.0,
-                    Eigentuemer = "Max Mustermann"
-                }
-            };
+            var grundstueck = new Grundstueck("0015 00012");
+            var meta = new Metadaten("BP-2022-089 – Wohngebiet Leipzig-Nord", 500.0, "Max Mustermann");
+            var flaeche = new Bauflaeche("0015 00012 001/002", 500.0, "Leipzig-Nord", Nutzungstyp.Brachflaeche, Bebaubarkeit.Ja, FlaechenStatus.Frei, meta);
             grundstueck.Bauflaechen.Add(flaeche);
 
-            var vorhaben = new Bauvorhaben
-            {
-                Id = 1,
-                Antragsteller = new Antragsteller { Name = "Erika Musterfrau", Firma = "Bau GmbH" },
-                GeplanteNutzung = Nutzungstyp.Wohnnutzung,
-                Beginn = DateTime.Now,
-                Fertigstellung = DateTime.Now.AddYears(1),
-                Status = VorhabenStatus.AntragEingereicht
-            };
+            var antragssteller = new Antragsteller("Erika Musterfrau", "erika@example.com", "Bau GmbH");
+            var vorhaben = new Bauvorhaben(1, antragssteller, Nutzungstyp.Wohnnutzung, DateTime.Now, DateTime.Now.AddYears(1), VorhabenStatus.AntragEingereicht);
 
             vorhaben.VerknuepfeFlaeche(flaeche);
             flaeche.MarkiereAls(FlaechenStatus.Reserviert);
