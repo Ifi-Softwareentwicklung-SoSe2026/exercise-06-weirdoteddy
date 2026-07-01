@@ -50,6 +50,14 @@ namespace Baufflaechenverwaltung
     {
         public string FlurstueckNummer { get; set; } = string.Empty;
         public List<Bauflaeche> Bauflaechen { get; set; } = new List<Bauflaeche>();
+
+        public Grundstueck()
+        { }
+
+        public Grundstueck(string flurstueckNummer)
+        {
+            FlurstueckNummer = flurstueckNummer;
+        }
     }
 
     public class Antragsteller
