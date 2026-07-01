@@ -57,6 +57,16 @@ namespace Baufflaechenverwaltung
         public string Name { get; set; } = string.Empty;
         public string Kontaktdaten { get; set; } = string.Empty;
         public string Firma { get; set; } = string.Empty;
+
+        public Antragsteller()
+        { }
+
+        public Antragsteller(string name, string kontaktdaten, string firma)
+        {
+            Name = name;
+            Kontaktdaten = kontaktdaten;
+            Firma = firma;
+        }
     }
 
     public class Bauvorhaben
