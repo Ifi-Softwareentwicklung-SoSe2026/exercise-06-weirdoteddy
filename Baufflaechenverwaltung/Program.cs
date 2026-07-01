@@ -28,10 +28,24 @@ namespace Baufflaechenverwaltung
         public string BPlanNummer { get; set; } = string.Empty;
         public double Bodenrichtwert { get; set; }
         public string Eigentuemer { get; set; } = string.Empty;
+        public Metadaten(string bplannr, double boden, string owner)
+        {
+            BplanNummer = bplannr;
+            Bodenrichtwert = boden;
+            Eigentuemer = owner;
     }
 
     public class Bauflaeche
     {
+        public Bauflaeche (string nr, double groesse, string lage, Nutzungstyp akt, Bebaubarkeit bebau, FlaechenStatus st, Metadaten meta){
+            FlursteueckNummer = nr;
+            Groesse = groesse;
+            Lage = lage;
+            AktuelleNutzung = akt;
+            Bebaubarkeit = bebau;
+            Status = st;
+            Metadaten = meta;
+        }
         public string FlurstueckNummer { get; set; } = string.Empty;
         public double Groesse { get; set; }
         public string Lage { get; set; } = string.Empty;
